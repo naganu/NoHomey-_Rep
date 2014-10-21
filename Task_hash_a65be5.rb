@@ -20,8 +20,6 @@ Dir.glob("#{ARGV[0]}/*.rb") do |dir_file_name_1|
 
 		file_name_1 = dir_file_name_1.split(/\//).last.to_s
 		file_name_2 = dir_file_name_2.split(/\//).last.to_s
-		digit_1  = file_name_1.split(/_/).last.split(/\./).first.to_s
-		digit_2  = file_name_2.split(/_/).last.split(/\./).first.to_s
 		student_name_1 = file_name_1.split(/_\d+/).first
 		student_name_2 = file_name_2.split(/_\d+/).first
 		if((student_name_1 != student_name_2)) 
