@@ -1,0 +1,36 @@
+require 'csv'
+h = Hash.new
+a = Array.new
+Dir.glob("#{ARGV[0]}/*.rb") do |dir_file_name_1|
+	Dir.glob("#{ARGV[1]}/*.rb") do |dir_file_name_2|
+	
+		file_name_1 = dir_file_name_1.split(/\//).last.to_s
+		file_name_2 = dir_file_name_2.split(/\//).last.to_s
+		name_1 = file_name_1.split(/\./).first.to_s
+		name_2 = file_name_2.split(/\./).first.to_s
+		if(name_1 != name_2)
+			n = name_2.length
+			a = /[A-Za-z]{n}/
+			if(a.match(name_2))
+				file_length = file_name_2.length.to_s 
+				file_length = ((file_length.to_i) / 2).round
+				h[file_name_2] = file_length.to_s
+			end
+		end
+		n = name_1.length
+		a = /[a-zA-Z]{n}/
+		if(a.match(name_1))
+			file_length = file_name_1.length.to_s
+			file_length = ((file_length.to_i) / 2).round
+			h[file_name_1] = file_length.to_s
+		end
+		
+	end
+end
+
+CSV.open("results.csv", "w") do |csv|
+	a = h.sort
+	a.each do |element|
+		csv << element
+	end
+end
